@@ -150,7 +150,7 @@ func (c *Client) fetch(ctx context.Context, rCtx *RemoteContext, ref string, lim
 			childrenHandler = images.FilterPlatforms(childrenHandler, rCtx.PlatformMatcher)
 		}
 
-		childrenHandler = snapshots.FilterLayerBySnapshotter(childrenHandler, c.SnapshotService(rCtx.Snapshotter), store, fetcher, ref)
+		childrenHandler = snapshots.FilterLayerBySnapshotter(childrenHandler, c.SnapshotService("remote"), store, fetcher, ref)
 
 		// Sort and limit manifests if a finite number is needed
 		if limit > 0 {
