@@ -149,10 +149,8 @@ func (c *Client) fetch(ctx context.Context, rCtx *RemoteContext, ref string, lim
 			// Filter children by platforms if specified.
 			childrenHandler = images.FilterPlatforms(childrenHandler, rCtx.PlatformMatcher)
 		}
-		// Skip downloading layers existing as remote snapshots.
-		if rCtx.SkipDownloadForExistingSnapshot {
-			childrenHandler = snapshots.FilterLayerBySnapshotter(childrenHandler, c.SnapshotService(rCtx.Snapshotter), store, fetcher, ref)
-		}
+
+		childrenHandler = snapshots.FilterLayerBySnapshotter(childrenHandler, c.SnapshotService(rCtx.Snapshotter), store, fetcher, ref)
 
 		// Sort and limit manifests if a finite number is needed
 		if limit > 0 {
