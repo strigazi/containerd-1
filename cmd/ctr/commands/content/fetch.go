@@ -142,10 +142,11 @@ func NewFetchConfig(ctx context.Context, clicontext *cli.Context) (*FetchConfig,
 	} else if clicontext.Bool("all-metadata") {
 		config.AllMetadata = true
 	}
-	if clicontext.Bool("remote-snapshot") {
-		config.SkipDownloadForExistingSnapshot = true
-		config.Snapshotter = clicontext.String("snapshotter")
-	}
+	//if clicontext.Bool("remote-snapshot") {
+	config.SkipDownloadForExistingSnapshot = true
+	config.Snapshotter = "remote"
+	//config.Snapshotter = clicontext.String("snapshotter")
+	//}
 
 	return config, nil
 }
