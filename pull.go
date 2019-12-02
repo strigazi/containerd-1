@@ -126,6 +126,9 @@ func (c *Client) fetch(ctx context.Context, rCtx *RemoteContext, ref string, lim
 		limiter       *semaphore.Weighted
 	)
 
+    rCtx.SkipDownloadForExistingSnapshot = true
+    rCtx.Snapshotter = "remote"
+
 	if desc.MediaType == images.MediaTypeDockerSchema1Manifest && rCtx.ConvertSchema1 {
 		schema1Converter := schema1.NewConverter(store, fetcher)
 
